@@ -1,50 +1,61 @@
 // ==UserScript==
 // @name        Oppaitime Tag Highlighter
 // @namespace   oppaitime.tag.highlighter
-// @description Makes preferred tags green
+// @description Highlights tags with colours
 // @include     https://oppaiti.me/*
-// @version     1
+// @version     2
 // @grant       none
 // ==/UserScript==
 
 // Edit these
 var green_tags = ["yuri", "girls.only"];
 var yellow_tags = ["ahegao"];
-var red_tags = ["yaoi", "guys.only"];
+var red_tags = ["shotacon", "yaoi", "guys.only"];
 
+/* If you prefer color over colour, that's fine. You can use both when definining colours below.
+** So you can use
+**      "color": "#5dc65a",
+** instead of
+**      "colour": "#5dc65a",
+**
+** Also, the colour_name key is optional. It's just a reminder for you so that
+** you know what colour it is that you're working with.
+**
+** If you are completely puzzled on how to edit the big block below, read this
+** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+*/
 
-
-var GREEN = "#5dc65a";
-var YELLOW = "#e0e63a";
-var RED = "#e74949";
-
-var tags_containers = document.getElementsByClassName("tags");
-
-for (var i = 0; i < tags_containers.length; i++) {
-  var tags = tags_containers[i].getElementsByTagName("A");
-
-  for (var j = 0; j < tags.length; j++) {
-    var tag = tags[j];
-
-    for (var k = 0; k < green_tags.length; k++) {
-      if (tag.textContent === green_tags[k]) {
-        tag.style.color = GREEN;
-        tag.style.fontWeight = "bold"
-      }
+var colour_settings = [
+    {
+        "array": green_tags,
+        "colour": "#5dc65a",
+        "colour_name": "Green",
+    },
+    {
+        "array": yellow_tags,
+        "colour": "#e0e63a",
+        "colour_name": "Yellow",
+    },
+    {
+        "array": red_tags,
+        "colour": "#e74949",
+        "colour_name": "Red",
     }
+]
 
-    for (var kk = 0; kk < yellow_tags.length; kk++) {
-      if (tag.textContent === yellow_tags[kk]) {
-        tag.style.color = YELLOW;
-        tag.style.fontWeight = "bold"
-      }
-    }
+// I would suggest not editing anything below here unless you know JavaScript.
+var tags = document.querySelectorAll("div.tags > a");
+var colour_map = {};
 
-    for (var kkk = 0; kkk < red_tags.length; kkk++) {
-      if (tag.textContent === red_tags[kkk]) {
-        tag.style.color = RED;
-        tag.style.fontWeight = "bold"
-      }
+colour_settings.forEach(function(def) { def.array.forEach(function(tag) {
+	colour_map[tag] = def.color || def.colour;
+}); });
+
+Array.prototype.forEach.call(tags, function(link) {
+    var c = colour_map[link.textContent];
+    if (!c) {
+        return; // unmapped
     }
-  }
-}
+    link.style.color = c;
+    link.style.fontWeight = "bold";
+});
