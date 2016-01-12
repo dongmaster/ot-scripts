@@ -53,7 +53,7 @@ if (tags.length === 0) {
 var colour_map = {};
 
 colour_settings.forEach(function(def) { def.array.forEach(function(tag) {
-	colour_map[tag] = def.color || def.colour;
+	colour_map[tag] = def.colour || def.color;
 }); });
 
 Array.prototype.forEach.call(tags, function(link) {
