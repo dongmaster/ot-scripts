@@ -3,7 +3,7 @@
 // @namespace   oppaitime.tag.highlighter
 // @description Highlights tags with colours
 // @include     https://oppaiti.me/*
-// @version     2
+// @version     3
 // @grant       none
 // ==/UserScript==
 
@@ -44,7 +44,12 @@ var colour_settings = [
 ]
 
 // I would suggest not editing anything below here unless you know JavaScript.
-var tags = document.querySelectorAll("div.tags > a");
+var tags = document.querySelectorAll(".tags a");
+
+if (tags.length === 0) {
+    var tags = document.querySelectorAll(".stats a");
+}
+
 var colour_map = {};
 
 colour_settings.forEach(function(def) { def.array.forEach(function(tag) {
