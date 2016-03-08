@@ -3,7 +3,7 @@
 // @namespace   oppaitime.total.seed.size
 // @description Displays the total seed size of people.
 // @include     https://oppaiti.me/user.php?id=*
-// @version     2
+// @version     3
 // @grant       none
 // ==/UserScript==
 
