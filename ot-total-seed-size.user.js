@@ -33,7 +33,9 @@ main();
 function main() {
     var seeding_list_link = document.querySelector("#comm_seeding > .brackets").href;
 
-    add_seeding_size_to_statistics();
+    if (seeding_list_link) {
+        add_seeding_size_to_statistics();
+    }
 
     // The line below and the big if block below is the cache code.
     ls = load("userscript_total_seed_size_cache");
@@ -98,7 +100,7 @@ function get_total_size_for_page(html) {
 
     for (var i = 0; i < torrents.length; i++) {
         var split = torrents[i].textContent.split(" ");
-        var size = parseFloat(split[0]);
+        var size = split[0];
         var unit = split[1];
 
         bytes += get_size(size, unit);
