@@ -3,7 +3,7 @@
 // @namespace   oppaitime.total.seed.size
 // @description Displays the total seed size of people.
 // @include     https://oppaiti.me/user.php?id=*
-// @version     1
+// @version     2
 // @grant       none
 // ==/UserScript==
 
@@ -57,7 +57,7 @@ function main() {
         }
     }
 
-    request(seeding_list_link);
+    request(seeding_list_link + "&way=DESC&order=Size");
 }
 
 function get_size(size, unit) {
@@ -150,7 +150,7 @@ function callback(response) {
 
         global_size += size;
 
-        request(next_button.href);
+        request(next_button.href + "&way=DESC&order=Size");
     } else if(!next_button && run_once === false) {
         var size = get_total_size_for_page(html);
 
