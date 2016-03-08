@@ -100,11 +100,13 @@ function get_total_size_for_page(html) {
 
     for (var i = 0; i < torrents.length; i++) {
         var split = torrents[i].textContent.split(" ");
-        var size = split[0];
+        var size = parseFloat(split[0]);
         var unit = split[1];
 
         bytes += get_size(size, unit);
     }
+
+    console.log("Bytes: ", bytes);
 
     return bytes;
 }
@@ -163,6 +165,7 @@ function callback(response) {
 }
 
 function finish(size) {
+    console.log("Finish size: ", size);
     var seeding_size_text = document.querySelector("#userscript_total_seed_size > span");
     seeding_size_text.textContent = human_readable_size(size);
 
