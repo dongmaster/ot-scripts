@@ -8,8 +8,8 @@
 // ==/UserScript==
 
 // Edit these
-var green_tags = ["yuri", "girls.only"];
-var yellow_tags = ["ahegao"];
+var green_tags = ["yuri", "girls.only", "ahegao"];
+var yellow_tags = ["blowjob", "daughter"];
 var red_tags = ["shotacon", "yaoi", "guys.only"];
 
 /* If you prefer color over colour, that's fine. You can use both when definining colours below.
@@ -61,6 +61,6 @@ Array.prototype.forEach.call(tags, function(link) {
     if (!c) {
         return; // unmapped
     }
-    link.style.color = c;
+    link.style.textShadow = c + " 0 0 8px";// + c + " 0 0 20px";
     link.style.fontWeight = "bold";
 });
